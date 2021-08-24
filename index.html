@@ -1,20 +1,112 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
-    <meta name="screen-orientation" content="portrait"/>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="full-screen" content="yes">
-    <meta name="x5-fullscreen" content="true">
-    <link rel="dns-prefetch" href="//cangdu.org">
-    <link rel="dns-prefetch" href="//elm.cangdu.org">
-    <title>elm</title>
-  <link href="/elm/static/css/app.css" rel="stylesheet"></head>
-  <body>
-    <div id="app">
-    	<router-view></router-view>
-    </div>
-  <script type="text/javascript" src="/elm/static/js/manifest.js"></script><script type="text/javascript" src="/elm/static/js/vendor.js"></script><script type="text/javascript" src="/elm/static/js/app.js"></script></body>
+<!doctype html>
+<!--suppress ALL -->
+<html lang="zh-CN" xmlns:v-seen="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-if="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title></title>
+  <style type="text/css">
+    *{
+      user-select:none;
+    }
+    body{
+      background :url(Venus.jpg)no-repeat;
+      background-size:cover;
+      background-attachment:fixed;
+    }
+    .login{
+      position:absolute;
+      top:50%;
+      margin-top: -200px;
+      left:50%;
+      margin-left: -200px;
+      background-color:whitesmoke;
+      opacity:60%;
+      /*opacity:75%;*/
+      width:400px;
+      height: 280px;
+      border-radius:25px;
+      text-align:center;
+      padding: 5px 40px;
+    }
+    p{
+      font-size:42px;
+      font-weight:600;
+    }
+    input{
+      background-color:whitesmoke;
+      width:100%;
+      height:48px;
+      margin-bottom: 10px;
+      border: none;
+      border-bottom: 2px solid silver;
+      outline:none;
+      font-size:22px;
+    }
+    .normal{
+      margin-top: 15px;
+    }
+  </style>
+  <!-- Bootstrap CSS-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <style type="text/css">
+
+  </style>
+  <!-- Vue2框架-->
+  <!--    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>-->
+  <!--Vue3框架-->
+  <script src="https://unpkg.com/vue@next"></script>
+  <!--AJAX库-->
+  <!--    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>-->
+  <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+  <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <div id="app">
+    <form action="" autocomplete="off" @submit.prevent="isUser()" class="login">
+      <p>Login</p>
+      <input type="text"  placeholder="用户名" v-model="user">
+      <input type="password"  placeholder="密码" v-model="password">
+      <button  type="submit" class="btn btn-primary normal" v-on:click="isUser()" v-if="!show">登录</button>
+      <h3>
+        {{message}}
+        <a href="http://20190319.study.yxtyw.com/mysql_example/exam.php" class="btn btn-primary" target_blank v-if="show">跳转</a>
+      </h3>
+    </form>
+  </div>
+<script>
+  const app=Vue.createApp({
+    data(){
+      return{
+        user:'',
+        password:'',
+        message:'',
+        show:false
+      }
+    },
+    methods:{
+      isUser(){
+        if(this.user==''||this.password==''){
+          this.message='账号和密码不能为空';
+          return false;
+        }
+        else if(this.user!="Jin"||this.password!="123456"){
+          this.message="账号或密码错误";
+          return false;
+        }
+        else{
+          this.message='欢迎你:'+this.user;
+          this.show=true;
+        }
+      }
+    }
+  }).mount('#app')
+</script>
+</body>
 </html>
